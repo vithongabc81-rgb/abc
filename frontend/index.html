@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Cloud Task Manager</h1>
+            <p>Ứng dụng quản lý công việc chạy trên cloud.</p>
+        </header>
+
+        <section class="card">
+            <h2>Thêm công việc</h2>
+            <form id="task-form">
+                <label for="title">Tiêu đề <span aria-hidden="true">*</span></label>
+                <input id="title" name="title" type="text" maxlength="200" required placeholder="Nhập tiêu đề công việc">
+
+                <label for="description">Mô tả</label>
+                <textarea id="description" name="description" maxlength="1000" rows="3" placeholder="Nhập mô tả (không bắt buộc)"></textarea>
+
+                <button type="submit" id="add-button">Add Task</button>
+            </form>
+            <p id="form-message" class="message" role="status" aria-live="polite"></p>
+        </section>
+
+        <section class="card">
+            <div class="list-header">
+                <h2>Danh sách công việc</h2>
+                <button type="button" id="refresh-button" class="secondary">Làm mới</button>
+            </div>
+            <p id="list-message" class="message" role="status" aria-live="polite"></p>
+            <ul id="task-list" class="task-list"></ul>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
