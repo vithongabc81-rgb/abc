@@ -58,9 +58,17 @@ The frontend currently targets `http://127.0.0.1:8001`; update its API base URL 
 - `PUT /tasks/{task_id}`
 - `DELETE /tasks/{task_id}`
 
-## Deployment
+## Deploy the backend to Render
 
-Deployment instructions for Render and Supabase will be added after the local CRUD flow is verified. Configure `DATABASE_URL` as a secret environment variable in the hosting provider; do not put credentials in source code.
+The root `render.yaml` configures a Python web service with `backend/` as its root directory. To deploy:
+
+1. Push the repository to GitHub.
+2. In Render, choose **New → Blueprint**, connect the repository, and apply `render.yaml`.
+3. Enter the Supabase PostgreSQL connection URI when Render prompts for `DATABASE_URL`. Keep credentials out of GitHub.
+4. Wait for the deploy and open the service URL followed by `/health`; it should return `{"status":"ok"}`.
+5. After deploying the frontend, update the service's `CORS_ORIGINS` environment variable to include the frontend's exact origin, then redeploy.
+
+The existing Supabase table must include all columns listed above. If `description` is missing, run the `ALTER TABLE` statement in `docs/architecture.md` before testing task endpoints.
 
 ## Project documents
 
