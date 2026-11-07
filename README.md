@@ -47,7 +47,7 @@ python -m http.server 5500 --directory C:\path\to\project\frontend
 
 Visit `http://127.0.0.1:5500`. The API docs are at `http://127.0.0.1:8001/docs`.
 
-The frontend currently targets `http://127.0.0.1:8001`; update its API base URL when deploying the backend.
+The frontend currently targets the deployed Render API at `https://cloud-task-manager-api-f5hz.onrender.com`. For local development, change this value in `frontend/app.js` to `http://127.0.0.1:8001`.
 
 ## API
 
@@ -69,6 +69,17 @@ The root `render.yaml` configures a Python web service with `backend/` as its ro
 5. After deploying the frontend, update the service's `CORS_ORIGINS` environment variable to include the frontend's exact origin, then redeploy.
 
 The existing Supabase table must include all columns listed above. If `description` is missing, run the `ALTER TABLE` statement in `docs/architecture.md` before testing task endpoints.
+
+## Deploy the frontend as a Render Static Site
+
+1. Push the latest project changes to the GitHub `main` branch.
+2. In Render, choose **New → Static Site** and connect the same GitHub repository and `main` branch.
+3. Set **Root Directory** to `frontend`.
+4. Leave the build command empty if Render allows it; otherwise use `echo "No build step"`.
+5. Set **Publish Directory** to `.` and create the site.
+6. Wait for Render to show the static site's public `onrender.com` URL.
+7. In the backend web service settings, set `CORS_ORIGINS` to the exact frontend origin (scheme and hostname only, with no trailing slash), for example `https://your-site.onrender.com`, then save and redeploy the backend.
+8. Open the frontend URL and test it. Task actions also require a working Supabase connection and the complete table schema.
 
 ## Project documents
 

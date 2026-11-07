@@ -1,5 +1,4 @@
-// Use the local API during development. Replace with the deployed Render URL later.
-const API_BASE_URL = "http://127.0.0.1:8001";
+const API_BASE_URL = "https://cloud-task-manager-api-f5hz.onrender.com";
 
 const taskForm = document.getElementById("task-form");
 const titleInput = document.getElementById("title");
